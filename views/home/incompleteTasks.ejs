@@ -1,0 +1,31 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+    <body>
+      <%- include('../includes/navigation.ejs') %>
+            <form class=" border border-light p-5"  >
+                <div style="margin-left:450px; width:400px;"><br>                     
+                      <h2 style="text-align: center">INCOMPLETED TASKS</h2><br>
+                        <% if (prods.length > 0) { %>
+                          <% for (let product of prods) { %>
+                                  
+                              <h3 style="text-align: center"><%= product.task %></h3> 
+                              <ul>
+                                  <li><b>Start date:</b> <%= product.commenced.toDateString() %></li>
+                                  <li><b>Deadline:</b> <%= product.deadline.toDateString() %></li>
+                                  <li><b>Today's date:</b> <%= product.dateNow.toDateString() %></li>
+                                  <li><b>Tasker: </b> <%= product.username %></li>
+                              </ul>
+                                <form action="/editTask" method="GET"> 
+                                    <input type="hidden" value="<%= product._id %>" name="productID">
+                                <button class="btn btn-success my-4 btn-block" type="submit">Edit</button><br><br>
+                                </form>
+                            
+                          <% } %>
+                        <% } else { %>
+                        <h1>None found</h1>
+                        <% } %> 
+                </div>
+                </form>
+    </body>

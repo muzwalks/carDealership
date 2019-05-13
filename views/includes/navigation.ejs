@@ -1,0 +1,87 @@
+<div class="backdrop"></div>
+<head>
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+    integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+    crossorigin="anonymous"
+  />
+  <header>
+    <nav class="navbar navbar-dark bg-dark" style="height: 80px">
+      <ul class="main-header__item-list">
+        <li>
+          <img
+            src="/images/logo2.png"
+            style="width: 50%;height: 50%"
+            alt="Task Logo"
+            style="float:left"
+          />
+        </li>
+        <li>
+          <a
+            style="margin-top:10px; margin-left:50px"
+            class="navbar-brand"
+            class="<%= path === '/profile' ? 'active' : '' %>"
+            href="/profile"
+            >HOME</a
+          >
+        </li>
+        <li>
+          <a
+            style="margin-top:10px;margin-left:30px;"
+            class="navbar-brand"
+            class="<%= path === '/newTask' ? 'active' : '' %>"
+            href="/newTask"
+            >NEW
+          </a>
+        </li>
+
+        <li>
+          <a
+            style="margin-top:10px;margin-left:30px;"
+            class="navbar-brand"
+            class="<%= path === '/completedTasks' ? 'active' : '' %>"
+            href="/completedTasks"
+            >COMPLETED
+          </a>
+        </li>
+        <li>
+          <a
+            style="margin-top:10px;margin-left:30px;"
+            class="navbar-brand"
+            class="<%= path === '/incompleteTasks' ? 'active' : '' %>"
+            href="/incompleteTasks"
+            >INCOMPLETED
+          </a>
+        </li>
+        <li>
+          <a
+            style="margin-top:10px;margin-left:30px;"
+            class="navbar-brand"
+            class="<%= path === '/overdue' ? 'active' : '' %>"
+            href="/overdue"
+            >OVERDUE
+          </a>
+        </li>
+        <li>
+          <a
+            style="margin-top:10px;margin-left:30px;"
+            class="navbar-brand"
+            class="<%= path === '/lastMonth' ? 'active' : '' %>"
+            href="/lastMonth"
+            >LAST MONTH
+          </a>
+        </li>
+        <li>
+          <a
+            style="margin-top:10px;margin-left:30px;"
+            class="navbar-brand"
+            class="<%= path === '/logout' ? 'active' : '' %>"
+            href="/logout"
+            >LOG OUT
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+</head>

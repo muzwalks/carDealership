@@ -1,0 +1,35 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+    <body>
+      <%- include('../includes/navigation.ejs') %>
+          <main>
+              <form class=" border border-light p-5"  action="/newTask" method="POST">
+                      
+                <div style="margin-left:450px; width:400px;">
+                    <h2 style="text-align:center">NEW TASK</h2>
+                      
+                    <div class="form-control">
+                        <label for="task"><b>Task</b></label>
+                        <input type="text" class="form-control mb-4" name="task" placeholder="add new task">
+                    </div>
+
+                    <div class="form-control">
+                            <label for="commenced"><b>Start date</b></label>
+                            <input type="date" class="form-control mb-4"  name="commenced" placeholder="date">
+                    </div> 
+
+                    <div class="form-control">
+                        <label for="deadline"><b>Deadline</b></label>
+                        <input type="date" class="form-control mb-4"  name="deadline" placeholder="deadline">
+                    </div>   
+                    
+                    <div class="form-control">
+                            <label for="deadline"><b>Tasker</b></label>
+                            <input type="text" class="form-control mb-4"  name="username" value="<%= currentUser.username %>" >
+                    </div> 
+                    <button class="btn btn-success my-4 btn-block"  type="submit">Commence</button><br>
+                </div>
+            </form>
+    </body>

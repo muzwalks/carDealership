@@ -1,0 +1,44 @@
+
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+    <body>
+      <%- include('../includes/navigation.ejs') %>
+
+      <form class="border border-light p-5"  method="POST" >
+
+      <div style="margin-left:450px; width:400px;">
+            <p class="h4 mb-4" style="text-align: center">EDIT TASK</p>
+
+        <div class="form-control">
+            <label for="task"><b>Task</b></label>
+            <input type="text" name="task" class="form-control" value="<%= prods.task %>" />
+        </div>
+        
+        <div class="form-control">
+            <label for="deadline"><b>Deadline</b></label>
+            <input type="text" name="deadline" class="form-control" value="<%= prods.deadline.toDateString() %>" />
+        </div>
+
+        <div class="form-control">
+            <label for="task"><b>Is the task complete? (True or false)</b></label>  
+            <input type="text" name="isCompleted" class="form-control" value="<%= prods.isCompleted %>">
+        </div>
+
+        <div class="form-control">
+                <label for="task"><b>Completion date</b></label>  
+                <input type="true" name="completionDate" class="form-control" value="">
+        </div>
+            
+        <div>
+            <input type="hidden" name="productID" value="<%= prods._id %>" />
+        </div>
+
+        <button type="submit" formaction="/completedTasks" style="width:49%"  class="btn btn-success my-4">Update</button>
+        <button type="submit" formaction="/deletetask" class="btn btn-success my-4" style="width:49%">Delete</button>
+    </div>
+    </form>
+
+  </body>
+</html>
