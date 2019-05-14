@@ -7,8 +7,9 @@
             <form class=" border border-light p-5"  >
                 <div style="margin-left:450px; width:400px;"><br>                     
                       <h2 style="text-align: center">INCOMPLETED TASKS</h2><br>
-                        <% if (prods.length > 0) { %>
-                          <% for (let product of prods) { %>
+                      <% if (prods.length > 0) { %>
+                      <% for (let product of prods) { %>
+                        <% if (product.username == currentUser.username ) { %>
                                   
                               <h3 style="text-align: center"><%= product.task %></h3> 
                               <ul>
@@ -21,11 +22,12 @@
                                     <input type="hidden" value="<%= product._id %>" name="productID">
                                 <button class="btn btn-success my-4 btn-block" type="submit">Edit</button><br><br>
                                 </form>
-                            
-                          <% } %>
-                        <% } else { %>
-                        <h1>None found</h1>
-                        <% } %> 
+                                
+                                <% } %>
+                                <% } %>
+                                <% } else { %>
+                                    <h3 style="text-align: center">None found</h3><br>
+                                <% } %> 
                 </div>
                 </form>
     </body>

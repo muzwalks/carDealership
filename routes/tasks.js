@@ -17,27 +17,20 @@ const authCheck = (req, res, next) => {
   }
 };
 
-//How would one check if a task is overdue here? The req.user.deadline and req.user.dateNow returns undefined
-// const checkOverdue = (req, res, next) => {
-//   if (req.user.deadline < req.user.dateNow) {
-//     req.user.overdue = true;
-//     console.log("shit" + req.user.overdue);
-//   } else {
-//     req.user.overdue = false;
-//     next();
-//   }
-// };
-
 //this is the page where completed tasks are displayed
 router.get(
   "/completedTasks",
   authCheck,
   asyncMiddleware(async (req, res) => {
     const id = req.user;
+    //find the current user's id
     const user = await User.findById(id);
-    const username = await User.findOne({ _id: user }, { _id: 0, username: 1 });
-    const tasks = await Task.find({ username } && { isCompleted: true });
+    // const username = await User.findOne({ _id: user }, { _id: 0, username: 1 });
+    const tasks = await Task.find({ isCompleted: true });
+
+    console.log(user);
     res.render("home/completedTasks", {
+      currentUser: user,
       prods: tasks,
       pageTitle: "Completed tasks",
       path: "/home/completedTasks"
@@ -51,11 +44,13 @@ router.get(
   authCheck,
   asyncMiddleware(async (req, res) => {
     const id = req.user;
+    //find the current user's id
     const user = await User.findById(id);
-    const username = await User.findOne({ _id: user }, { _id: 0, username: 1 });
-    const tasks = await Task.find({ username } && { isCompleted: false });
+    // const username = await User.findOne({ _id: user }, { _id: 0, username: 1 });
+    const tasks = await Task.find({ isCompleted: false });
 
     res.render("home/incompleteTasks", {
+      currentUser: user,
       prods: tasks,
       pageTitle: "Incomplete tasks",
       path: "/home/incompleteTasks"
@@ -69,12 +64,10 @@ router.get(
   asyncMiddleware(async (req, res) => {
     const id = req.user;
     const user = await User.findById(id);
-    const username = await User.findOne({ _id: user }, { _id: 0, username: 1 });
-    const tasks = await Task.find(
-      { username } && { deadline: { $lte: new Date() } }
-    );
+    const tasks = await Task.find({ deadline: { $lte: new Date() } });
     console.log(tasks);
     res.render("home/overdue", {
+      currentUser: user,
       prods: tasks,
       pageTitle: "Completed tasks",
       path: "/home/overdue"
@@ -82,7 +75,7 @@ router.get(
   })
 );
 
-//this renders the newTask page
+//this renders the newTask page. The current user will be assigned as the tasker
 router.get(
   "/newTask",
   authCheck,
@@ -182,7 +175,8 @@ router.get(
   asyncMiddleware(async (req, res) => {
     const tasks = await Task.find({
       completionDate: {
-        $gte: new Date(new Date() - 1000 * 60 * 60 * 72)
+        $lt: new Date(),
+        $gte: new Date(new Date().setDate(new Date().getDate() - 30))
       }
     });
     res.render("home/lastMonth", {
