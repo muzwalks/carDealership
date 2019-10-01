@@ -4,7 +4,7 @@
 </head>
     <body>
       <%- include('../includes/navigation.ejs') %>
-        <form class=" border border-light p-5"  >
+        <form class=" border border-light p-5" action="/editTask" method="GET"  >
             <div style="margin-left:450px; width:400px;"><br>
                 <h2 style="text-align: center">COMPLETED TASKS</h2><br>
                 <% if (prods.length > 0) { %>
@@ -13,12 +13,10 @@
                               <h3 style="text-align: center"><%= product.task %></h3> 
                                 <ul>
                                     <li><b>Start date:</b> <%= product.commenced.toDateString() %></li>
-
                                     <li><b>Completion date:</b> <%= product.completionDate.toDateString() %></li>
                                     <li><b>Today's date:</b> <%= product.dateNow.toDateString() %></li>
                                     <li><b>Tasker: </b> <%= product.username %></li>
-                                </ul>
-                                <form action="/editTask" method="GET"> 
+                                </ul>                                
                                   <input type="hidden" value="<%= product._id %>" name="productID">
                                   <button class="btn btn-success my-4 btn-block" type="submit">Edit</button><br><br>
                                 </form>

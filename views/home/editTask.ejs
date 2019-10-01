@@ -6,39 +6,102 @@
     <body>
       <%- include('../includes/navigation.ejs') %>
 
-      <form class="border border-light p-5"  method="POST" >
+      <form class="border border-light p-5"   method="POST" >
 
       <div style="margin-left:450px; width:400px;">
             <p class="h4 mb-4" style="text-align: center">EDIT TASK</p>
 
         <div class="form-control">
             <label for="task"><b>Task</b></label>
-            <input type="text" name="task" class="form-control" value="<%= prods.task %>" />
+            <input type="text" name="task" class="form-control" value="<%= prod.task %>" />
         </div>
         
         <div class="form-control">
             <label for="deadline"><b>Deadline</b></label>
-            <input type="text" name="deadline" class="form-control" value="<%= prods.deadline.toDateString() %>" />
+            <input type="text" name="deadline" class="form-control" value="<%= prod.deadline.toDateString() %>" />
         </div>
 
-        <div class="form-control">
-            <label for="task"><b>Is the task complete? (True or false)</b></label>  
-            <input type="text" name="isCompleted" class="form-control" value="<%= prods.isCompleted %>">
-        </div>
-
-        <div class="form-control">
-                <label for="task"><b>Completion date</b></label>  
-                <input type="true" name="completionDate" class="form-control" value="">
-        </div>
+            <% if (prod.isCompleted === true) { %>
+                <p style = "color:red">This task is complete. Reopen? &nbsp
+                <label>
+                        <input
+                          id="isComplete1"
+                          checked="<% prod.isCompleted === true ? true : false %>"
+                          type="radio"
+                          name="isCompleted1"  
+                          onclick="myFunction(this.value)"
+                          value="false"
+                        />
+                        <span>Yes</span>
+                      </label>
+                      &nbsp
+                      <label>
+                        <input
+                          id="isComplete2"
+                          checked="<% prod.isCompleted === false ? true : false %>"
+                          type="radio"
+                          name="isCompleted1"  
+                          onclick="myFunction(this.value)"
+                          value="true">                
+                        <span>No</span>
+                      </label>
+                    </p>
+                    <div class="form-control">
+                            <label for="task"><b>Completion date</b></label>  
+                            <input type="text" name="completionDate" class="form-control" value="<%=prod.completionDate.toDateString()%>">
+                    </div>
+            <% } else { %>
+            <p>Complete task? &nbsp
+            <label>
+                <input
+                  id="isComplete1"
+                  checked="<% prod.isCompleted === true ? true : false %>"
+                  type="radio"
+                  name="isCompleted1"  
+                  onclick="myFunction(this.value)"
+                  value="true"
+                />
+                <span>Yes</span>
+              </label>
+              &nbsp
+              <label>
+                <input
+                  id="isComplete2"
+                  checked="<% prod.isCompleted === false ? true : false %>"
+                  type="radio"
+                  name="isCompleted1"  
+                  onclick="myFunction(this.value)"
+                  value="false">                
+                <span>No</span>
+              </label> 
+                    </p>
+                    <div class="form-control">
+                            <label for="task"><b>Completion date</b></label>  
+                            <input type="text" name="completionDate" class="form-control" value="">
+                    </div>
+                    <% } %>
+                    
+         
             
         <div>
-            <input type="hidden" name="productID" value="<%= prods._id %>" />
+            <input type="hidden" name="productID" value="<%= prod._id %>" >
         </div>
 
         <button type="submit" formaction="/completedTasks" style="width:49%"  class="btn btn-success my-4">Update</button>
         <button type="submit" formaction="/deletetask" class="btn btn-success my-4" style="width:49%">Delete</button>
+        <input type="hidden" name="isCompleted" id="result" value="<%= prod.isCompleted %>">
     </div>
     </form>
 
   </body>
 </html>
+
+<script>
+    function myFunction(browser) {
+      document.getElementById("result").value = browser;
+    }
+    </script>
+
+
+
+

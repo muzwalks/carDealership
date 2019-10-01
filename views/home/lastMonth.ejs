@@ -4,11 +4,12 @@
 </head>
     <body>
       <%- include('../includes/navigation.ejs') %>
-        <form class=" border border-light p-5"  >
+        <form class=" border border-light p-5" action="/editTask" method="GET"  >
             <div style="margin-left:450px; width:400px;"><br>
                 <h2 style="text-align: center">COMPLETED WITHIN THE LAST MONTH</h2><br>
-                        <% if (prods.length > 0) { %>
-                          <% for (let product of prods) { %>
+                <% if (prods.length >= 0) { %>
+                  <% for (let product of prods) { %>
+                    <% if (product.username == currentUser.username ) { %>
                               <h3 style="text-align: center"><%= product.task %></h3> 
                                 <ul>
                                   <li><b>Start date:</b> <%= product.commenced.toDateString() %></li>
@@ -16,14 +17,14 @@
                                   <li><b>Today's date:</b> <%= product.dateNow.toDateString() %></li>
                                   <li><b>Tasker: </b> <%= product.username %></li>
                                 </ul>
-                                <form action="/editTask" method="GET"> 
                                   <input type="hidden" value="<%= product._id %>" name="productID">
                                   <button class="btn btn-success my-4 btn-block" type="submit">Edit</button><br><br>
                                 </form>
-                          <% } %>
-                        <% } else { %>
-                            <h3 style="text-align: center">None found</h3><br>
-                        <% } %>                
+                                <% } %>
+                                <% } %>
+                                <% } else { %>
+                                    <h3 style="text-align: center">None found</h3><br>
+                                <% } %>                
                         
                       </div>
 </form>
