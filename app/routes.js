@@ -26,6 +26,7 @@ module.exports = function(app) {
   app.use("/", tasks);
   app.use("/", authRoutes);
   app.use("/profile", profileRoutes);
+  app.use("/thankyou", profileRoutes);
   // app.use("/", users);
   app.use(error);
   app.use(express.static(path.join(__dirname, "public")));

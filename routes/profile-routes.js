@@ -29,4 +29,20 @@ router.get(
   })
 );
 
+//this is the profile welcome page
+router.get(
+  "/",
+  authCheck,
+  asyncMiddleware(async (req, res) => {
+    const id = req.user;
+    const user = await User.findById(id);
+    console.log(user);
+    res.render("home/thankyou", {
+      pageTitle: "All Tasks",
+      path: "/home/thankyou",
+      currentUser: user
+    });
+  })
+);
+
 module.exports = router;
